@@ -1,6 +1,29 @@
-<div class="ui footer vertical segment">
-    <div class="ui center aligned container">
-        <div>Designed and built with all the love and passion in the world by <a href="{{ site.author_url }}" target="_blank">{{ site.author }}</a></div>
-        <div><i class="copyright outline icon"></i>{{ site.time | date: "%Y" }} <a href="{{ site.organization_url }}" target="_blank">{{ site.organization }}</a></div>
+{%- assign cv_email = site.data.cv.status.email | replace: "[at]", "@" | replace: "[dot]", "." -%}
+<footer class="ui footer vertical segment" aria-label="{% t footer.label %}">
+    <div class="ui container">
+        <div class="ui stackable three column grid">
+            <div class="column">
+                <div class="footer-name">{{ site.data.cv.status.first_name }} {{ site.data.cv.status.family_name | upcase }}</div>
+                <div class="footer-muted">{{ site.data.cv.status.position }}</div>
+                <div class="footer-contact"><i class="paper plane icon"></i><a href="mailto:{{ cv_email }}">{{ site.data.cv.status.email }}</a></div>
+            </div>
+            <div class="column">
+                <div class="footer-title">{% t footer.quick_links %}</div>
+                <div class="ui vertical text menu footer-links">
+                    {% include menu_items.html %}
+                </div>
+            </div>
+            <div class="column">
+                <div class="footer-title">{% t footer.language %}</div>
+                <div class="footer-lang">{% include lang_switcher.html %}</div>
+                <div class="footer-updated"><i class="version-icon sync alternate icon green"></i>{% t footer.updated %} <span class="version-text">?</span></div>
+                <button type="button" class="ui basic small button back-to-top"><i class="arrow up icon"></i>{% t footer.back_to_top %}</button>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="footer-bottom">
+            <div>{% t footer.credit %} <a href="{{ site.author_url }}" target="_blank" rel="noopener">{{ site.author }}</a></div>
+            <div><i class="copyright outline icon"></i>{{ site.time | date: "%Y" }} <a href="{{ site.organization_url }}" target="_blank" rel="noopener">{{ site.organization }}</a></div>
+        </div>
     </div>
-</div>
+</footer>
