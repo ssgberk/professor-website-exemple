@@ -1,0 +1,12 @@
+{%- assign default_lang = site.languages | first -%}
+<span class="lang-switcher" role="group" aria-label="{% t nav.language %}">
+{%- for lang in site.languages -%}
+    {%- if lang == default_lang -%}
+        {%- capture lang_url %}{{ site.baseurl_root }}{{ page.url }}{% endcapture -%}
+    {%- else -%}
+        {%- capture lang_url %}{{ site.baseurl_root }}/{{ lang }}{{ page.url }}{% endcapture -%}
+    {%- endif -%}
+    {%- assign lang_label = lang | slice: 0, 2 | upcase -%}
+    <a class="lang-link{% if lang == site.lang %} active{% endif %}" href="{{ lang_url }}" hreflang="{{ lang }}" lang="{{ lang }}"{% if lang == site.lang %} aria-current="true"{% endif %}>{{ lang_label }}</a>
+{%- endfor -%}
+</span>

@@ -1,0 +1,15 @@
+nav:
+  label: Navegação principal
+  cv: Curriculum Vitæ
+  language: Idioma
+  github: Perfil no GitHub
+  email: Enviar um e-mail
+  menu: Abrir menu
+footer:
+  label: Rodapé do site
+  contact: Contato
+  quick_links: Seções
+  language: Idioma
+  updated: Atualizado
+  back_to_top: Voltar ao topo
+  credit: Projetado e construído com todo o amor e paixão do mundo por

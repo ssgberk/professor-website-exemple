@@ -1,15 +1,22 @@
-<div class="ui borderless menu">
-    <div class="ui container">
-        <div class="toc link icon item"><i class="sidebar icon"></i></div>
-        <a class="header item" href="{{ '/' | relative_url }}">{{ site.data.cv.status.first_name }} {{ site.data.cv.status.family_name | upcase }}</a>
-        <div class="disabled item">{{ site.data.cv.status.position }}</div>
-        <div class="right menu">
-            <div class="ui dropdown item">
-                <i class="content icon"></i>Curriculum Vit&aelig;<i class="dropdown icon"></i>
-                <div class="menu">
-                    {% include menu_items.html %}
+{%- assign cv_name = site.data.cv.status.first_name | append: " " | append: site.data.cv.status.family_name | upcase -%}
+{%- assign cv_email = site.data.cv.status.email | replace: "[at]", "@" | replace: "[dot]", "." -%}
+<nav class="site-header" aria-label="{% t nav.label %}">
+    <div class="ui borderless menu">
+        <div class="ui container">
+            <a class="toc link icon item" role="button" tabindex="0" aria-label="{% t nav.menu %}"><i class="sidebar icon"></i></a>
+            <a class="header item" href="{{ '/' | relative_url }}">{{ cv_name }}</a>
+            <div class="disabled item position">{{ site.data.cv.status.position }}</div>
+            <div class="right menu">
+                <div class="ui dropdown item">
+                    <i class="content icon"></i>{% t nav.cv %}<i class="dropdown icon"></i>
+                    <div class="menu">
+                        {% include menu_items.html %}
+                    </div>
                 </div>
+                <div class="item lang-item">{% include lang_switcher.html %}</div>
+                <a class="icon item" href="{{ site.github }}" target="_blank" rel="noopener noreferrer" aria-label="{% t nav.github %}"><i class="github large icon"></i></a>
+                <a class="icon item" href="mailto:{{ cv_email }}" aria-label="{% t nav.email %}"><i class="envelope outline large icon"></i></a>
             </div>
         </div>
     </div>
-</div>
+</nav>
