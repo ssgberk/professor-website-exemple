@@ -1,15 +1,101 @@
-<div id="publications" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="file alternate icon"></i>Publications</h1>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.publications -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.title }}{% if entry.label %} &middot; <span class="ui grey text text-normal">{{ entry.label }}</span>{% endif %}{% for item in entry.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>
-                    <div class="meta">Authored by: {% for author in entry.authors %}{% unless forloop.first %} &middot; {% endunless %}{{ author }}{% endfor %}</div>
-                    {% if entry.details %}<div class="extra">{% for detail in entry.details %}{% unless forloop.first %} &middot; {% endunless %}{{ detail.title }}: {{ detail.content }}{% endfor %}</div>{% endif %}
-                    {% if entry.abstract %}<div class="description"><b>Abstract:</b> {{ entry.abstract }}</div>{% endif %}
-                </div>
-            </div>
-        {%- endfor -%}
+{%- assign owner = site.data.cv.status.first_name | append: " " | append: site.data.cv.status.family_name -%}
+{%- assign years = "" | split: "" -%}
+{%- assign types = "" | split: "" -%}
+{%- for entry in site.data.cv.publications -%}
+    {%- for d in entry.details -%}
+        {%- if d.title == "Year" -%}{%- assign y = d.content | append: "" -%}{%- assign years = years | push: y -%}{%- endif -%}
+        {%- if d.title == "Type" -%}
+            {%- assign t = d.content | downcase -%}
+            {%- if t contains "journal" -%}{%- assign types = types | push: "journal" -%}
+            {%- elsif t contains "conference" or t contains "proceedings" -%}{%- assign types = types | push: "conference" -%}
+            {%- elsif t contains "chapter" -%}{%- assign types = types | push: "chapter" -%}
+            {%- elsif t contains "dissertation" or t contains "thesis" -%}{%- assign types = types | push: "thesis" -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor -%}
+{%- assign years = years | uniq | sort | reverse -%}
+{%- assign type_order = "journal,conference,chapter,thesis" | split: "," -%}
+<section id="publications" class="ui cv-section basic vertical segment" aria-labelledby="publications-title">
+    <h2 id="publications-title" class="ui dividing header cv-section-title"><i class="file alternate icon" aria-hidden="true"></i><span class="content">{% t sections.publications %}</span></h2>
+
+    <div class="cv-filters" data-filters="publication-list" hidden>
+        <div class="cv-filter-group" role="group" aria-label="{% t ui.filter_type %}">
+            <span class="cv-filter-label" aria-hidden="true">{% t ui.type %}</span>
+            <button type="button" class="cv-chip" data-filter="type" data-value="all" aria-pressed="true">{% t ui.all %}</button>
+            {%- for t in type_order -%}{%- if types contains t -%}
+            <button type="button" class="cv-chip" data-filter="type" data-value="{{ t }}" aria-pressed="false"><span class="cv-dot cv-dot-{{ t }}" aria-hidden="true"></span>{% t badge.{{ t }} %}</button>
+            {%- endif -%}{%- endfor -%}
+        </div>
+        <div class="cv-filter-group" role="group" aria-label="{% t ui.filter_year %}">
+            <span class="cv-filter-label" aria-hidden="true">{% t ui.year %}</span>
+            <button type="button" class="cv-chip" data-filter="year" data-value="all" aria-pressed="true">{% t ui.all %}</button>
+            {%- for y in years -%}
+            <button type="button" class="cv-chip" data-filter="year" data-value="{{ y }}" aria-pressed="false">{{ y }}</button>
+            {%- endfor -%}
+        </div>
+        <div class="cv-filter-count" aria-live="polite"><span class="js-count">{{ site.data.cv.publications.size }}</span>/{{ site.data.cv.publications.size }} {% t ui.shown %}</div>
     </div>
-</div>
+
+    <div id="publication-list" class="cv-pub-list">
+        {%- for year in years -%}
+        <div class="cv-year-group" data-year-group="{{ year }}">
+            <h3 class="cv-year-title">{{ year }}</h3>
+            <div class="cv-year-items">
+            {%- for entry in site.data.cv.publications -%}
+                {%- assign e_year = "" -%}{%- assign e_type = "other" -%}{%- assign venue = "" -%}{%- assign volume = "" -%}{%- assign issue = "" -%}{%- assign pages = "" -%}{%- assign supervisor = "" -%}
+                {%- for d in entry.details -%}
+                    {%- case d.title -%}
+                        {%- when "Year" -%}{%- assign e_year = d.content | append: "" -%}
+                        {%- when "Venue" -%}{%- assign venue = d.content -%}
+                        {%- when "Volume" -%}{%- assign volume = d.content | append: "" -%}
+                        {%- when "Issue" -%}{%- assign issue = d.content | append: "" -%}
+                        {%- when "Pages" -%}{%- assign pages = d.content | append: "" | replace: "-", "–" -%}
+                        {%- when "Supervised by" -%}{%- assign supervisor = d.content -%}
+                        {%- when "Type" -%}
+                            {%- assign t = d.content | downcase -%}
+                            {%- if t contains "journal" -%}{%- assign e_type = "journal" -%}
+                            {%- elsif t contains "conference" or t contains "proceedings" -%}{%- assign e_type = "conference" -%}
+                            {%- elsif t contains "chapter" -%}{%- assign e_type = "chapter" -%}
+                            {%- elsif t contains "dissertation" or t contains "thesis" -%}{%- assign e_type = "thesis" -%}
+                            {%- endif -%}
+                    {%- endcase -%}
+                {%- endfor -%}
+                {%- if e_year == year -%}
+                <article id="{{ entry.id }}" class="cv-pub" data-type="{{ e_type }}" data-year="{{ e_year }}" aria-labelledby="{{ entry.id }}-title">
+                    <h4 id="{{ entry.id }}-title" class="cv-entry-title cv-pub-title">{{ entry.title }}</h4>
+                    <div class="cv-pub-authors"><span class="visually-hidden">{% t ui.authors %}: </span>{% for author in entry.authors %}{% unless forloop.first %}, {% endunless %}{% if author == owner %}<strong>{{ author }}</strong>{% else %}{{ author }}{% endif %}{% endfor %}</div>
+                    <div class="cv-pub-venue">
+                        {%- if e_type != "other" -%}<span class="ui mini basic label cv-badge cv-badge-{{ e_type }}">{% t badge.{{ e_type }} %}</span>{%- endif -%}
+                        {%- if venue != "" -%}<em>{{ venue }}</em>{%- elsif entry.label -%}<em>{{ entry.label }}</em>{%- endif -%}
+                        {%- if volume != "" -%}, {{ volume }}{% if issue != "" %}({{ issue }}){% endif %}{%- endif -%}
+                        {%- if pages != "" -%}, {{ pages }}{%- endif -%}
+                        <span class="cv-pub-year-inline">, {{ e_year }}</span>
+                    </div>
+                    {%- if supervisor != "" -%}<div class="cv-meta">{% t ui.supervised_by %}: {{ supervisor }}</div>{%- endif -%}
+                    {%- assign real_links = entry.links | where_exp: "l", "l.link != '#'" -%}
+                    {%- if real_links.size > 0 -%}
+                    <div class="cv-pub-links">
+                        {%- for l in real_links -%}
+                            {%- if l.icon contains "pdf" -%}{%- assign l_label = "PDF" -%}{%- assign l_icon = "file pdf outline" -%}
+                            {%- elsif l.link contains "doi.org" -%}{%- assign l_label = "DOI" -%}{%- assign l_icon = "linkify" -%}
+                            {%- else -%}{%- capture l_label %}{% t ui.link %}{% endcapture -%}{%- assign l_icon = l.icon -%}{%- endif -%}
+                            <a class="ui mini basic compact button cv-link-button" href="{% if l.id %}{{ site.baseurl }}/#{{ l.id }}{% else %}{{ l.link }}{% endif %}"{% unless l.id %} target="_blank" rel="noopener"{% endunless %}><i class="{{ l_icon }} icon" aria-hidden="true"></i>{{ l_label }}</a>
+                        {%- endfor -%}
+                    </div>
+                    {%- endif -%}
+                    {%- if entry.abstract -%}
+                    <details class="cv-disclosure cv-pub-abstract">
+                        <summary>{% t ui.abstract %}</summary>
+                        <p class="cv-prose">{{ entry.abstract }}</p>
+                    </details>
+                    {%- endif -%}
+                </article>
+                {%- endif -%}
+            {%- endfor -%}
+            </div>
+        </div>
+        {%- endfor -%}
+        <p class="cv-empty cv-meta" hidden>{% t ui.no_match %}</p>
+    </div>
+</section>

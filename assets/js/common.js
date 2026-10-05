@@ -81,4 +81,38 @@ $('.toc.item').on('keydown', function (e) {
         btn.addEventListener('click', function () { window.print(); });
     });
 
+    // publication filter chips (type x year)
+    document.querySelectorAll('[data-filters]').forEach(function (bar) {
+        var list = document.getElementById(bar.getAttribute('data-filters'));
+        if (!list) return;
+        var entries = list.querySelectorAll('.cv-pub');
+        var groups = list.querySelectorAll('[data-year-group]');
+        var count = bar.querySelector('.js-count');
+        var empty = list.querySelector('.cv-empty');
+        var state = { type: 'all', year: 'all' };
+        bar.hidden = false;
+        bar.addEventListener('click', function (e) {
+            var chip = e.target.closest('.cv-chip');
+            if (!chip) return;
+            var key = chip.getAttribute('data-filter');
+            state[key] = chip.getAttribute('data-value');
+            bar.querySelectorAll('.cv-chip[data-filter="' + key + '"]').forEach(function (c) {
+                c.setAttribute('aria-pressed', String(c === chip));
+            });
+            var shown = 0;
+            entries.forEach(function (el) {
+                var ok = (state.type === 'all' || el.getAttribute('data-type') === state.type) &&
+                         (state.year === 'all' || el.getAttribute('data-year') === state.year);
+                el.classList.toggle('is-filtered-out', !ok);
+                if (ok) shown++;
+            });
+            groups.forEach(function (g) {
+                g.classList.toggle('is-filtered-out', !g.querySelector('.cv-pub:not(.is-filtered-out)'));
+            });
+            if (count) count.textContent = shown;
+            if (empty) empty.hidden = shown > 0;
+            refreshLayout();
+        });
+    });
+
 })();
