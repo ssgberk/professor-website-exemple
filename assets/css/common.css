@@ -770,6 +770,39 @@ a.ui.label.cv-badge:hover {
     font-variant-numeric: tabular-nums;
 }
 
+/* ---- 11. Timeline (education, experience) ------------------------------ */
+.cv-timeline {
+    list-style: none;
+    margin: 0 0 0 0.35rem;
+    padding: 0;
+    border-left: 2px solid var(--cv-rule);
+}
+.cv-tl-item {
+    position: relative;
+    padding: 0 0 var(--cv-space-4) 1.5rem;
+}
+.cv-tl-item:last-child {
+    padding-bottom: 0.25rem;
+}
+.cv-tl-dot {
+    position: absolute;
+    left: -7px;
+    top: 0.3em;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #8a8a8a;
+}
+.cv-tl-item:first-child > .cv-tl-dot {
+    background: var(--cv-accent);
+    border-color: var(--cv-accent);
+}
+.cv-tl-period {
+    margin-bottom: 0.15rem;
+    font-variant-numeric: tabular-nums;
+}
+
 /* ---- 14. Focus and motion ---------------------------------------------- */
 .cv-main a:focus-visible,
 .cv-profile a:focus-visible,

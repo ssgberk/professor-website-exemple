@@ -1,0 +1,9 @@
+{%- comment -%} One timeline entry. Params: id, title (html), subtitle (html), period, location, details, extra (html). {%- endcomment -%}
+<li id="{{ include.id }}" class="cv-tl-item">
+    <span class="cv-tl-dot" aria-hidden="true"></span>
+    <div class="cv-tl-period cv-meta">{{ include.period }}{% if include.location %}<span class="cv-meta-sep" aria-hidden="true"> · </span>{{ include.location }}{% endif %}</div>
+    <h4 class="cv-entry-title">{{ include.title }}</h4>
+    {%- if include.subtitle and include.subtitle != "" -%}<div class="cv-tl-sub">{{ include.subtitle }}</div>{%- endif -%}
+    {%- if include.details -%}{% include detail_list.html details=include.details %}{%- endif -%}
+    {%- if include.extra -%}{{ include.extra }}{%- endif -%}
+</li>

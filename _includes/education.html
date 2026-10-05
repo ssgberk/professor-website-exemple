@@ -1,22 +1,17 @@
-<div id="education" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="graduation cap icon"></i>Education</h1>
-    <div class="ui relaxed items">
+<section id="education" class="ui cv-section basic vertical segment" aria-labelledby="education-title">
+    <h2 id="education-title" class="ui dividing header cv-section-title"><i class="graduation cap icon" aria-hidden="true"></i><span class="content">{% t sections.education %}</span></h2>
+    <ol class="cv-timeline">
         {%- for entry in site.data.cv.education -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.institution }}</div>
-                    <div class="meta">{{ entry.degree }}{% if entry.label %} <span class="ui teal text">{{ entry.label }}</span>{% endif %} &middot; GPA: {{ entry.gpa }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    <div class="description">
-                        <div class="ui bulleted list">
-                            {% if entry.details %}{% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}{% endif %}
-                            {% if entry.coursework_projects %}<a class="item" href="{{ '/' | relative_url }}#{{ entry.id }}-coursework-projects">{{ entry.coursework_projects.size }} coursework projects</a>{% endif %}
-                            {% if entry.courses %}<a class="item" href="{{ '/' | relative_url }}#{{ entry.id }}-courses">{{ entry.courses.size }} major courses</a>{% endif %}
-                            {% if entry.activities_and_societies %}<div class="item"><b>Activities and societies:</b> {% for item in entry.activities_and_societies %}{% unless forloop.first %} &middot; {% endunless %}{{ item }}{% endfor %}</div>{% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {%- capture subtitle %}{{ entry.degree }}{% if entry.label %} <span class="ui mini basic label cv-badge cv-badge-distinction">{{ entry.label }}</span>{% endif %}{% if entry.gpa %}<span class="cv-meta"><span class="cv-meta-sep" aria-hidden="true"> · </span>{% t ui.gpa %} {{ entry.gpa }}</span>{% endif %}{% endcapture -%}
+            {%- capture extra -%}
+                {%- if entry.coursework_projects or entry.activities_and_societies -%}
+                <ul class="cv-details cv-details-secondary">
+                    {%- if entry.coursework_projects -%}<li><a href="{{ site.baseurl }}/#{{ entry.id }}-coursework-projects">{{ entry.coursework_projects.size }} · {% t sub.coursework %}</a></li>{%- endif -%}
+                    {%- if entry.activities_and_societies -%}<li><b>{% t ui.activities %}:</b> {{ entry.activities_and_societies | join: " · " }}</li>{%- endif -%}
+                </ul>
+                {%- endif -%}
+            {%- endcapture -%}
+            {% include timeline_item.html id=entry.id title=entry.institution subtitle=subtitle period=entry.time location=entry.location details=entry.details extra=extra %}
         {%- endfor -%}
-    </div>
-</div>
+    </ol>
+</section>

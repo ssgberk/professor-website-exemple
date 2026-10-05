@@ -1,117 +1,48 @@
-<div id="experience" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="business time icon"></i>Experience</h1>
-    <h2 class="ui teal sub-section header">Vocational</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.experience.vocational -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.employer }}</div>
-                    <div class="meta">{{ entry.position }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+{%- assign exp = site.data.cv.experience -%}
+<section id="experience" class="ui cv-section basic vertical segment" aria-labelledby="experience-title">
+    <h2 id="experience-title" class="ui dividing header cv-section-title"><i class="business time icon" aria-hidden="true"></i><span class="content">{% t sections.experience %}</span></h2>
+
+    <h3 class="cv-sub-title">{% t sub.vocational %}</h3>
+    <ol class="cv-timeline">
+        {%- for entry in exp.vocational -%}
+            {% include timeline_item.html id=entry.id title=entry.employer subtitle=entry.position period=entry.time location=entry.location details=entry.details %}
         {%- endfor -%}
-    </div>
-    <h2 class="ui teal sub-section header">Research Internship</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.experience.research -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.institution }} &middot; <span class="ui grey text text-normal">{{ entry.department }}</span></div>
-                    <div class="meta">{{ entry.position }}{% if entry.advisor %} &middot; Supervised by: {{ entry.advisor }}{% endif %}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+    </ol>
+
+    <h3 class="cv-sub-title">{% t sub.research_internship %}</h3>
+    <ol class="cv-timeline">
+        {%- for entry in exp.research -%}
+            {%- capture title %}{{ entry.institution }} <span class="cv-muted">· {{ entry.department }}</span>{% endcapture -%}
+            {%- capture subtitle %}{{ entry.position }}{% if entry.advisor %}<span class="cv-meta"><span class="cv-meta-sep" aria-hidden="true"> · </span>{% t ui.supervised_by %}: {{ entry.advisor }}</span>{% endif %}{% endcapture -%}
+            {% include timeline_item.html id=entry.id title=title subtitle=subtitle period=entry.time location=entry.location details=entry.details %}
         {%- endfor -%}
-    </div>
-    <h2 class="ui teal sub-section header">Part-Time</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.experience.part_time -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.employer }}</div>
-                    <div class="meta">{{ entry.position }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+    </ol>
+
+    <h3 class="cv-sub-title">{% t sub.part_time %}</h3>
+    <ol class="cv-timeline">
+        {%- for entry in exp.part_time -%}
+            {% include timeline_item.html id=entry.id title=entry.employer subtitle=entry.position period=entry.time location=entry.location details=entry.details %}
         {%- endfor -%}
-    </div>
-    <h2 class="ui teal sub-section header">Exchange Experience</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.experience.exchange -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.institution }}</div>
-                    <div class="meta">{{ entry.department }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+    </ol>
+
+    <h3 class="cv-sub-title">{% t sub.exchange %}</h3>
+    <ol class="cv-timeline">
+        {%- for entry in exp.exchange -%}
+            {% include timeline_item.html id=entry.id title=entry.institution subtitle=entry.department period=entry.time location=entry.location details=entry.details %}
         {%- endfor -%}
-    </div>
-    <h2 class="ui teal sub-section header">University Service</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.experience.university_service -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.position }}</div>
-                    <div class="meta">{{ entry.university }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+    </ol>
+
+    <h3 class="cv-sub-title">{% t sub.university_service %}</h3>
+    <ol class="cv-timeline">
+        {%- for entry in exp.university_service -%}
+            {% include timeline_item.html id=entry.id title=entry.position subtitle=entry.university period=entry.time location=entry.location details=entry.details %}
         {%- endfor -%}
-    </div>
-    <h2 class="ui teal sub-section header">Volunteer Experience</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.experience.volunteer -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.position }}</div>
-                    <div class="meta">{{ entry.employer }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+    </ol>
+
+    <h3 class="cv-sub-title">{% t sub.volunteer %}</h3>
+    <ol class="cv-timeline">
+        {%- for entry in exp.volunteer -%}
+            {% include timeline_item.html id=entry.id title=entry.position subtitle=entry.employer period=entry.time location=entry.location details=entry.details %}
         {%- endfor -%}
-    </div>
-</div>
+    </ol>
+</section>
