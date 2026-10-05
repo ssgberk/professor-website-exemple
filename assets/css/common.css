@@ -910,6 +910,171 @@ summary:focus-visible {
     }
 }
 
+/* ---- 16. Print: what "Download CV (PDF)" produces ---------------------- */
+@media print {
+    @page {
+        margin: 14mm 14mm 16mm;   /* fits both A4 and Letter */
+    }
+    html {
+        font-size: 11px;
+    }
+    body,
+    .pusher,
+    .ui.main.segment {
+        background: #fff !important;
+    }
+    *,
+    *::before,
+    *::after {
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    .site-header,
+    .ui.footer.segment,
+    .ui.sidebar,
+    .cv-following,
+    .cv-filters,
+    .cv-toggle,
+    .cv-profile-actions,
+    .cv-profile-updated,
+    .cv-avatar,
+    .cv-link-button,
+    .cv-pub-abstract,
+    .cv-disclosure > summary,
+    a.cv-icon-link[href*="#"] {
+        display: none !important;
+    }
+    .print-only {
+        display: flex !important;
+    }
+
+    .pusher {
+        padding-top: 0 !important;
+    }
+    .ui.main.segment {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .ui.grid.container {
+        width: auto !important;
+        margin: 0 !important;
+    }
+    .ui.grid > .row {
+        display: block !important;
+        padding: 0 !important;
+    }
+    .ui.grid > .row > .column.cv-aside,
+    .ui.grid > .row > .column.cv-main {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    .ui.internally.celled.grid > .row > .column,
+    .ui.internally.celled.grid > .row {
+        box-shadow: none !important;
+    }
+
+    /* profile as a compact top block */
+    .cv-profile {
+        padding: 0 0 0.6rem;
+        border-bottom: 2px solid #000;
+        margin-bottom: 0.4rem;
+    }
+    .cv-profile .cv-profile-name {
+        font-size: 2rem;
+    }
+    .cv-profile .cv-profile-tagline {
+        margin: 0.35rem 0;
+        max-width: none;
+    }
+    .cv-profile-facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1.2rem;
+        border: none;
+        padding: 0;
+    }
+
+    .ui.cv-section.segment,
+    .cv-main > .ui.cv-section.segment:first-child {
+        padding-top: 1.1rem !important;
+    }
+    .ui.dividing.header.cv-section-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.6rem;
+        border-bottom: 1px solid #000;
+    }
+    h2, h3, h4,
+    .cv-term-title,
+    .cv-year-title {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+    .cv-pub,
+    .cv-tl-item,
+    .cv-card,
+    .cv-course,
+    .cv-entry,
+    .cv-term,
+    .cv-highlights li,
+    .cv-compact-list li {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .cv-main p,
+    .cv-prose,
+    .cv-details,
+    .cv-pub,
+    .cv-tl-item {
+        max-width: none;
+    }
+    .ui.label,
+    .ui.mini.basic.label.cv-badge {
+        background: none !important;
+        border: 1px solid #000 !important;
+    }
+    .cv-meta,
+    .cv-muted,
+    .cv-tl-period {
+        color: #333 !important;
+    }
+    .cv-timeline {
+        border-left-color: #999;
+    }
+    .cv-tl-dot {
+        border-color: #000 !important;
+        background: #fff !important;
+    }
+    .cv-tl-item {
+        padding-bottom: 1rem;
+    }
+    .ui.cards.cv-cards > .card.cv-card {
+        border: 1px solid #999 !important;
+    }
+    .ui.cards > .card.cv-card > .extra.content.cv-card-links {
+        display: none !important;
+    }
+    .cv-disclosure > .cv-details {
+        margin-top: 0.25rem;
+    }
+
+    .cv-year-group,
+    .cv-term {
+        padding: 0.5rem 0;
+    }
+    .cv-main a,
+    .cv-profile a {
+        text-decoration: none !important;
+    }
+    a[data-print-url]::after {
+        content: " (" attr(data-print-url) ")";
+        font-size: 0.85em;
+        font-weight: normal;
+    }
+}
+
 /* ---- Fomantic colour helpers (legacy) ---- */
 .text-normal {
     font-weight: normal;

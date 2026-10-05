@@ -144,4 +144,21 @@ $('.toc.item').on('keydown', function (e) {
         });
     });
 
+    // print: short URLs after external links, disclosures opened
+    document.querySelectorAll('.cv-main a[href^="http"], .cv-profile a[href^="http"]').forEach(function (a) {
+        var short = a.hostname.replace(/^www\./, '') + a.pathname.replace(/\/$/, '');
+        if (short.length > 42) short = short.slice(0, 40) + '…';
+        if (a.textContent.trim().replace(/\/$/, '') !== short) a.setAttribute('data-print-url', short);
+    });
+    var reopened = [];
+    window.addEventListener('beforeprint', function () {
+        document.querySelectorAll('details.cv-disclosure:not([open])').forEach(function (d) {
+            d.open = true;
+            reopened.push(d);
+        });
+    });
+    window.addEventListener('afterprint', function () {
+        reopened.forEach(function (d) { d.open = false; });
+        reopened = [];
+    });
 })();
