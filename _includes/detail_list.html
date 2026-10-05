@@ -1,0 +1,9 @@
+{%- comment -%} Bullet list of entry details. Params: details, skip (comma list of titles to omit). {%- endcomment -%}
+{%- assign skip = include.skip | default: "" | split: "," -%}
+<ul class="cv-details">
+    {%- for detail in include.details -%}
+        {%- unless skip contains detail.title -%}
+        <li>{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% include inline_links.html links=detail.links %}</li>
+        {%- endunless -%}
+    {%- endfor -%}
+</ul>

@@ -14,3 +14,70 @@ footer:
   back_to_top: Back to top
   credit: Designed and built with all the love and passion in the world by
   template: "Based on the CV template by"
+sections:
+  status: Profile
+  summary: Summary
+  publications: Publications
+  teaching: Teaching
+  projects: Research & Projects
+  education: Education
+  experience: Experience
+  awards: Awards
+  patents: Patents
+  languages: Languages
+  skills: Skills
+  additional_info: Additional Info
+sub:
+  brief_biography: Brief Biography
+  highlights: Highlights
+  vocational: Vocational
+  research_internship: Research Internship
+  part_time: Part-Time
+  exchange: Exchange Experience
+  university_service: University Service
+  volunteer: Volunteer Experience
+  research_projects: Research Projects
+  open_source: Open Source Projects
+  competition: Competition Projects
+  undergraduate: Undergraduate Projects
+  coursework: Coursework Projects
+  hobbies: Hobbies
+  contact_advice: Advice for Contacting
+  contact_for: "Please get in touch for:"
+ui:
+  contact: Contact
+  download_cv: Download CV (PDF)
+  show_all: Show all
+  show_less: Show less
+  filter_type: Filter by type
+  filter_year: Filter by year
+  type: Type
+  year: Year
+  all: All
+  shown: shown
+  no_match: No publications match the selected filters.
+  abstract: Abstract
+  details: Details
+  funding: Funding
+  team: Team
+  summary: Summary
+  supervised_by: Supervised by
+  authors: Authors
+  inventors: Invented by
+  filed_on: Filed on
+  created: Created
+  gpa: GPA
+  activities: Activities and societies
+  courses: courses
+  terms: terms
+  link: Link
+  avatar: Portrait of
+badge:
+  journal: Journal
+  conference: Conference
+  chapter: Book chapter
+  thesis: Thesis
+  undergraduate: Undergraduate
+  graduate: Graduate
+  instructor: Instructor
+  co_instructor: Co-instructor

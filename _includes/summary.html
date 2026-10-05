@@ -1,11 +1,9 @@
-<div id="summary" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="stream icon"></i>Summary</h1>
-    <h2 class="ui header">Brief Biography</h2>
-    <div class="ui bulleted list">
-        {% for entry in site.data.cv.summary.brief_biography %}<div class="item">{{ entry }}</div>{% endfor %}
-    </div>
-    <h2 class="ui header">Highlights</h2>
-    <div class="ui bulleted list">
-        {% for entry in site.data.cv.summary.highlights %}<div class="item">{{ entry }}</div>{% endfor %}
-    </div>
-</div>
+<section id="summary" class="ui cv-section basic vertical segment" aria-labelledby="summary-title">
+    <h2 id="summary-title" class="ui dividing header cv-section-title"><i class="stream icon" aria-hidden="true"></i><span class="content">{% t sections.summary %}</span></h2>
+    <h3 class="cv-sub-title">{% t sub.brief_biography %}</h3>
+    <p class="cv-prose">{{ site.data.cv.summary.brief_biography | join: " " }}</p>
+    <h3 class="cv-sub-title">{% t sub.highlights %}</h3>
+    <ul class="cv-highlights">
+        {% for entry in site.data.cv.summary.highlights %}<li><i class="check icon" aria-hidden="true"></i><span>{{ entry }}</span></li>{% endfor %}
+    </ul>
+</section>

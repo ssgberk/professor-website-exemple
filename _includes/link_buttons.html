@@ -1,0 +1,8 @@
+{%- comment -%} Small labelled link buttons. Params: links. Links equal to "#" are skipped. {%- endcomment -%}
+{%- for item in include.links -%}
+    {%- if item.id -%}
+        <a class="ui mini basic compact button cv-link-button" href="{{ site.baseurl }}/#{{ item.id }}"><i class="{{ item.icon }} icon" aria-hidden="true"></i>{{ item.tooltip | default: item.id }}</a>
+    {%- elsif item.link and item.link != "#" -%}
+        <a class="ui mini basic compact button cv-link-button" href="{{ item.link }}" target="_blank" rel="noopener"><i class="{{ item.icon }} icon" aria-hidden="true"></i>{{ item.tooltip | default: item.link }}</a>
+    {%- endif -%}
+{%- endfor -%}

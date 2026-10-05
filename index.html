@@ -2,21 +2,21 @@
 layout: default
 ---
 
-<div class="ui main vertical segment">
+<main class="ui main vertical segment" id="main">
     <div class="ui internally celled stackable grid container">
         <div class="row">
-            <div class="four wide column">
+            <div class="four wide column cv-aside">
                 {% include status.html %}
                 {% include following_menu.html %}
             </div>
-            <div class="twelve wide column">
+            <div class="twelve wide column cv-main">
                 {% include summary.html %}
+                {% include publications.html %}
+                {% include courses.html %}
+                {% include projects.html %}
                 {% include education.html %}
                 {% include experience.html %}
-                {% include projects.html %}
-                {% include courses.html %}
                 {% include awards.html %}
-                {% include publications.html %}
                 {% include patents.html %}
                 {% include languages.html %}
                 {% include skills.html %}
@@ -24,4 +24,4 @@ layout: default
             </div>
         </div>
     </div>
-</div>
+</main>

@@ -1,0 +1,8 @@
+{%- comment -%} Icon-only links after a line of text. Params: links. Links equal to "#" are skipped. {%- endcomment -%}
+{%- for item in include.links -%}
+    {%- if item.id -%}
+        <a class="cv-icon-link" href="{{ site.baseurl }}/#{{ item.id }}" aria-label="{{ item.tooltip | default: item.id }}"{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon" aria-hidden="true"></i></a>
+    {%- elsif item.link and item.link != "#" -%}
+        <a class="cv-icon-link" href="{{ item.link }}" target="_blank" rel="noopener" aria-label="{{ item.tooltip | default: item.link }}"{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon" aria-hidden="true"></i></a>
+    {%- endif -%}
+{%- endfor -%}

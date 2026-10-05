@@ -1,47 +1,59 @@
 - name: Status
+  i18n: sections.status
   icon: user circle
   id: status
 
 - name: Summary
+  i18n: sections.summary
   icon: stream
   id: summary
 
+- name: Publications
+  i18n: sections.publications
+  icon: file alternate
+  id: publications
+
+- name: Teaching
+  i18n: sections.teaching
+  icon: book
+  id: courses
+
+- name: Research & Projects
+  i18n: sections.projects
+  icon: rocket
+  id: projects
+
 - name: Education
+  i18n: sections.education
   icon: graduation cap
   id: education
 
 - name: Experience
+  i18n: sections.experience
   icon: business time
   id: experience
 
-- name: Projects
-  icon: rocket
-  id: projects
-
-- name: Courses
-  icon: book
-  id: courses
-
 - name: Awards
+  i18n: sections.awards
   icon: trophy
   id: awards
 
-- name: Publications
-  icon: file alternate
-  id: publications
-
 - name: Patents
+  i18n: sections.patents
   icon: balance scale
   id: patents
 
 - name: Languages
+  i18n: sections.languages
   icon: translate
   id: languages
 
 - name: Skills
+  i18n: sections.skills
   icon: code
   id: skills
 
 - name: Additional Info
+  i18n: sections.additional_info
   icon: infinity
   id: additional-info

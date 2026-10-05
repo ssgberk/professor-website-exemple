@@ -5,7 +5,7 @@ $(document).ready(function () {
     if ($(window).width() >= 768) {
         $('.cv-section').visibility({
             once: false,
-            offset: headerHeight() + 1,
+            offset: headerHeight() + 16, // > scroll-margin-top (header + 0.75rem)
             onTopPassed: function () {
                 $('.ui.following.menu .item.active').removeClass('active');
                 $(`.ui.following.menu .item[href$=${$(this).attr('id')}]`).addClass('active');
@@ -60,3 +60,19 @@ $('.toc.item').on('keydown', function (e) {
         $(this).trigger('click');
     }
 });
+/* ==========================================================================
+   Content enhancements (spec 003-site-redesign). Vanilla JS, progressive:
+   without JS everything stays visible and the print button stays hidden.
+   ========================================================================== */
+(function () {
+    var desktop = window.matchMedia('(min-width: 768px)');
+
+    // keep Fomantic's cached offsets (menu highlighting, sticky) in sync
+    function refreshLayout() {
+        if (!desktop.matches || !window.jQuery) return;
+        var $ = window.jQuery;
+        if ($.fn.visibility) $('.cv-section').visibility('refresh');
+        if ($.fn.sticky) $('.ui.sticky').sticky('refresh');
+    }
+
+})();

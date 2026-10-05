@@ -14,3 +14,70 @@ footer:
   back_to_top: Volver arriba
   credit: Diseñado y construido con todo el amor y la pasión del mundo por
   template: "Basado en la plantilla de CV de"
+sections:
+  status: Perfil
+  summary: Resumen
+  publications: Publicaciones
+  teaching: Docencia
+  projects: Investigación y Proyectos
+  education: Formación
+  experience: Experiencia
+  awards: Premios
+  patents: Patentes
+  languages: Idiomas
+  skills: Habilidades
+  additional_info: Información adicional
+sub:
+  brief_biography: Biografía
+  highlights: Destacados
+  vocational: Profesional
+  research_internship: Pasantía de investigación
+  part_time: Medio tiempo
+  exchange: Intercambio
+  university_service: Servicio universitario
+  volunteer: Voluntariado
+  research_projects: Proyectos de investigación
+  open_source: Proyectos de código abierto
+  competition: Proyectos de competición
+  undergraduate: Proyectos de grado
+  coursework: Proyectos de asignaturas
+  hobbies: Aficiones
+  contact_advice: Cómo contactar
+  contact_for: "Póngase en contacto para:"
+ui:
+  contact: Contacto
+  download_cv: Descargar CV (PDF)
+  show_all: Mostrar todo
+  show_less: Mostrar menos
+  filter_type: Filtrar por tipo
+  filter_year: Filtrar por año
+  type: Tipo
+  year: Año
+  all: Todos
+  shown: mostradas
+  no_match: Ninguna publicación coincide con los filtros seleccionados.
+  abstract: Resumen
+  details: Detalles
+  funding: Financiación
+  team: Equipo
+  summary: Resumen
+  supervised_by: Dirigida por
+  authors: Autores
+  inventors: Inventores
+  filed_on: Presentada el
+  created: Creado el
+  gpa: Promedio
+  activities: Actividades y asociaciones
+  courses: asignaturas
+  terms: semestres
+  link: Enlace
+  avatar: Retrato de
+badge:
+  journal: Revista
+  conference: Congreso
+  chapter: Capítulo de libro
+  thesis: Tesis
+  undergraduate: Grado
+  graduate: Posgrado
+  instructor: Profesor
+  co_instructor: Coprofesor
