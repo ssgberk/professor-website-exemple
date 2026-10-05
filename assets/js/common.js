@@ -75,4 +75,10 @@ $('.toc.item').on('keydown', function (e) {
         if ($.fn.sticky) $('.ui.sticky').sticky('refresh');
     }
 
+    // "Download CV (PDF)" uses the print stylesheet
+    document.querySelectorAll('.js-print').forEach(function (btn) {
+        btn.hidden = false;
+        btn.addEventListener('click', function () { window.print(); });
+    });
+
 })();

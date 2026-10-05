@@ -381,6 +381,83 @@ a.ui.label.cv-badge:hover {
     margin-top: var(--cv-space-1);
 }
 
+/* ---- 5. Profile card (left column) ------------------------------------- */
+.cv-profile {
+    padding: 1em 0 var(--cv-space-3);
+}
+.cv-avatar {
+    display: block;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    background: var(--cv-surface);
+    border: 1px solid var(--cv-rule-soft);
+    margin-bottom: var(--cv-space-3);
+}
+.cv-profile .cv-profile-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 0.3rem;
+    letter-spacing: 0.01em;
+}
+.cv-profile-position {
+    font-size: 1.05rem;
+    color: var(--cv-text-soft);
+    line-height: 1.35;
+}
+.cv-profile-institution {
+    color: var(--cv-muted);
+    margin-top: 0.15rem;
+}
+.cv-profile .cv-profile-tagline {
+    margin: var(--cv-space-2) 0 var(--cv-space-3);
+    line-height: 1.55;
+    color: var(--cv-text);
+}
+.cv-profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--cv-space-3);
+}
+.cv-profile-actions .ui.button {
+    margin: 0;
+    flex: 1 1 auto;
+    text-align: center;
+}
+.cv-profile-actions .ui.button[hidden] {
+    display: none;
+}
+.cv-profile-facts {
+    list-style: none;
+    margin: 0;
+    padding: var(--cv-space-2) 0;
+    border-top: 1px solid var(--cv-rule);
+    border-bottom: 1px solid var(--cv-rule);
+}
+.cv-profile-facts li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    padding: 0.2rem 0;
+    line-height: 1.4;
+}
+.cv-profile-facts .icon {
+    flex: none;
+    width: 1.2em;
+    color: var(--cv-muted);
+}
+.cv-profile-updated {
+    padding-top: var(--cv-space-2);
+    font-size: 0.9rem;
+    color: var(--cv-muted);
+}
+.cv-following .ui.vertical.segment {
+    border-bottom: none;
+}
+
 /* ---- 6. Summary --------------------------------------------------------- */
 .cv-main .cv-highlights {
     max-width: none;

@@ -1,21 +1,26 @@
-<div id="status" class="ui cv-status vertical segment">
-    <img class="ui centered medium rounded image" src="{{ site.data.cv.status.avatar }}" alt="Avatar">
-    <h1 class="ui header">
-        <div class="content">
-            {{ site.data.cv.status.first_name }} {{ site.data.cv.status.family_name | upcase }}
-            <div class="sub header">{{ site.data.cv.status.position }}</div>
-        </div>
-    </h1>
-    <div><i class="map marked alternate icon"></i>{{ site.data.cv.status.location }}</div>
-    <div><i class="laptop code icon"></i>{{ site.data.cv.status.specialty }}</div>
-</div>
-<div class="ui cv-status vertical segment">
-    <div><i class="industry icon"></i>{{ site.data.cv.status.employer }}</div>
-    <div><i class="university icon"></i>{{ site.data.cv.status.education }}</div>
-</div>
-<div class="ui cv-status vertical segment">
-    <div><i class="paper plane icon"></i>{{ site.data.cv.status.email }}</div>
-</div>
-<div class="ui cv-status vertical segment last">
-    <div><i id="version-icon" class="sync alternate icon"></i>Updated <span id="version">? time ago</span></div>
-</div>
+{%- assign st = site.data.cv.status -%}
+{%- assign cv_email = st.email | replace: "[at]", "@" | replace: "[dot]", "." -%}
+<section id="status" class="cv-profile" aria-labelledby="profile-name">
+    <img class="cv-avatar" src="{{ st.avatar | relative_url }}" alt="{% t ui.avatar %} {{ st.first_name }} {{ st.family_name }}" width="160" height="160">
+    <h1 id="profile-name" class="cv-profile-name">{{ st.first_name }} {{ st.family_name | upcase }}</h1>
+    <div class="cv-profile-position">{{ st.position }}</div>
+    <div class="cv-profile-institution">{{ st.employer }}</div>
+    {%- if st.tagline -%}
+        <p class="cv-profile-tagline">{{ st.tagline }}</p>
+    {%- else -%}
+        <p class="cv-profile-tagline">{{ site.data.cv.summary.brief_biography | first }}</p>
+    {%- endif -%}
+    <div class="cv-profile-actions">
+        <a class="ui small black button" href="mailto:{{ cv_email }}"><i class="paper plane icon" aria-hidden="true"></i>{% t ui.contact %}</a>
+        <button type="button" class="ui small basic button js-print" hidden><i class="file pdf outline icon" aria-hidden="true"></i>{% t ui.download_cv %}</button>
+    </div>
+    <ul class="cv-profile-facts">
+        <li><i class="map marked alternate icon" aria-hidden="true"></i><span>{{ st.location }}</span></li>
+        <li><i class="laptop code icon" aria-hidden="true"></i><span>{{ st.specialty }}</span></li>
+        <li><i class="industry icon" aria-hidden="true"></i><span>{{ st.employer }}</span></li>
+        <li><i class="university icon" aria-hidden="true"></i><span>{{ st.education }}</span></li>
+        <li class="print-only"><i class="paper plane icon" aria-hidden="true"></i><span>{{ cv_email }}</span></li>
+        <li class="print-only"><i class="globe icon" aria-hidden="true"></i><span>{{ site.url | remove: "https://" | remove: "http://" }}</span></li>
+    </ul>
+    <div class="cv-profile-updated"><i id="version-icon" class="sync alternate icon" aria-hidden="true"></i>{% t footer.updated %} <span id="version">?</span></div>
+</section>
