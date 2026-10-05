@@ -698,6 +698,78 @@ a.ui.label.cv-badge:hover {
     margin-right: 0;
 }
 
+/* ---- 10. Project cards -------------------------------------------------- */
+.ui.cards.cv-cards {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.ui.cards.cv-cards > .card.cv-card {
+    box-shadow: 0 0 0 1px var(--cv-rule), 0 1px 2px 0 rgba(34, 36, 38, 0.06);
+}
+.ui.cards > .card.cv-card > .content {
+    padding: 1.1em 1.2em;
+}
+.cv-card .cv-card-title {
+    margin-bottom: 0.3rem;
+}
+.cv-card-period .icon {
+    margin-right: 0.3em;
+}
+.cv-card-sub {
+    margin-top: 0.1rem;
+}
+.cv-card-extra {
+    margin-top: 0.45rem;
+}
+.cv-card .cv-card-summary {
+    margin: 0.6rem 0 0;
+    line-height: 1.5;
+}
+.cv-card-facts {
+    margin: 0.6rem 0 0;
+    padding: 0;
+}
+.cv-card-facts > div {
+    display: flex;
+    gap: 0.45rem;
+    align-items: baseline;
+    font-size: 0.92rem;
+    color: var(--cv-text-soft);
+    margin-top: 0.2rem;
+}
+.cv-card-facts dt .icon {
+    color: var(--cv-muted);
+    margin: 0;
+}
+.cv-card-facts dd {
+    margin: 0;
+}
+.ui.cards > .card.cv-card > .extra.content.cv-card-links {
+    padding: 0.55em 1.2em 0.8em;
+    background: var(--cv-surface);
+}
+
+.cv-coursework {
+    margin-top: var(--cv-space-3);
+}
+.cv-compact-list {
+    list-style: none;
+    margin: var(--cv-space-1) 0 0;
+    padding: 0;
+    max-width: var(--cv-measure);
+}
+.cv-compact-list li {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.6rem;
+    padding: 0.2rem 0;
+}
+.cv-compact-date {
+    color: var(--cv-muted);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+
 /* ---- 14. Focus and motion ---------------------------------------------- */
 .cv-main a:focus-visible,
 .cv-profile a:focus-visible,

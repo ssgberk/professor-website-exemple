@@ -1,97 +1,50 @@
-<div id="projects" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="rocket icon"></i>Projects</h1>
-    <h2 class="ui teal sub-section header">Open Source Projects</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.projects.open_source -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header"><span class="ui grey text text-normal">{{ entry.owner }} /</span> {{ entry.repository }}{% for item in entry.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>
-                    <div class="meta">{{ entry.description }}{% if entry.website %} &middot; <a href="{{ entry.website }}" target="_blank">{{ entry.website }}</a>{% endif %}</div>
-                    <div class="extra">Created at: {{ entry.created_at }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
-        {%- endfor -%}
-    </div>
-    <h2 class="ui teal sub-section header">Research Projects</h2>
-    <div class="ui relaxed items">
+<section id="projects" class="ui cv-section basic vertical segment" aria-labelledby="projects-title">
+    <h2 id="projects-title" class="ui dividing header cv-section-title"><i class="rocket icon" aria-hidden="true"></i><span class="content">{% t sections.projects %}</span></h2>
+
+    <h3 class="cv-sub-title">{% t sub.research_projects %}</h3>
+    <div class="ui two stackable cards cv-cards">
         {%- for entry in site.data.cv.projects.research -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.name }}{% for item in entry.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>
-                    <div class="meta">{{ entry.institution }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+            {%- capture period %}{{ entry.time }} · {{ entry.location }}{% endcapture -%}
+            {% include project_card.html entry=entry title=entry.name period=period meta=entry.institution %}
         {%- endfor -%}
     </div>
-    <h2 class="ui teal sub-section header">Competition Projects</h2>
-    <div class="ui relaxed items">
+
+    <h3 class="cv-sub-title">{% t sub.open_source %}</h3>
+    <div class="ui two stackable cards cv-cards">
+        {%- for entry in site.data.cv.projects.open_source -%}
+            {%- capture title %}<span class="cv-muted">{{ entry.owner }} /</span> {{ entry.repository }}{% endcapture -%}
+            {%- capture period %}{% t ui.created %} {{ entry.created_at }}{% endcapture -%}
+            {%- if entry.website -%}{%- assign site_label = entry.website | remove: "https://" | remove: "http://" -%}{%- assign tail = site_label | slice: -1 -%}{%- if tail == "/" -%}{%- assign n = site_label.size | minus: 1 -%}{%- assign site_label = site_label | slice: 0, n -%}{%- endif -%}{%- capture extra %}<a href="{{ entry.website }}" target="_blank" rel="noopener"><i class="globe icon" aria-hidden="true"></i>{{ site_label }}</a>{% endcapture -%}{%- else -%}{%- assign extra = nil -%}{%- endif -%}
+            {% include project_card.html entry=entry title=title period=period meta="" extra=extra %}
+        {%- endfor -%}
+    </div>
+
+    <h3 class="cv-sub-title">{% t sub.competition %}</h3>
+    <div class="ui two stackable cards cv-cards">
         {%- for entry in site.data.cv.projects.competition -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.name }}{% for item in entry.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>
-                    <div class="meta">{{ entry.competition }} &middot; <a href="{{ '/' | relative_url }}#{{ entry.award.id }}">{{ entry.award.prize }}</a></div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
+            {%- capture period %}{{ entry.time }} · {{ entry.location }}{% endcapture -%}
+            {%- capture extra %}<a class="ui mini basic label cv-badge cv-badge-prize" href="{{ site.baseurl }}/#{{ entry.award.id }}"><i class="trophy icon" aria-hidden="true"></i>{{ entry.award.prize }}</a>{% endcapture -%}
+            {% include project_card.html entry=entry title=entry.name period=period meta=entry.competition extra=extra %}
         {%- endfor -%}
     </div>
-    <h2 class="ui teal sub-section header">Undergraduate Projects</h2>
-    <div class="ui relaxed items">
+
+    <h3 class="cv-sub-title">{% t sub.undergraduate %}</h3>
+    <div class="ui two stackable cards cv-cards">
         {%- for entry in site.data.cv.projects.undergraduate -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.name }}{% for item in entry.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>
-                    <div class="meta">{{ entry.institution }}</div>
-                    <div class="extra">{{ entry.time }} &middot; {{ entry.location }}</div>
-                    {%- if entry.details -%}
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for detail in entry.details %}<div class="item">{% if detail.title %}<b>{{ detail.title }}:</b> {% endif %}{{ detail.content }}{% for item in detail.links %}<a {% if item.id %}href="{{ '/' | relative_url }}#{{ item.id }}"{% else %}href="{{ item.link }}" target="_blank"{% endif %}{% if item.tooltip %} data-tooltip="{{ item.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}><i class="{{ item.icon }} icon"></i></a>{% endfor %}</div>{% endfor %}
-                            </div>
-                        </div>
-                    {%- endif -%}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <h2 class="ui teal sub-section header">Coursework Projects</h2>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.education -%}
-            {%- if entry.coursework_projects -%}
-                <div id="{{ entry.id }}-coursework-projects" class="item">
-                    <div class="content">
-                        <div class="header">{{ entry.institution }}</div>
-                        <div class="meta">{{ entry.coursework_projects.size }} coursework projects</div>
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for coursework_project in entry.coursework_projects %}<div class="item"><b>{{ coursework_project.time }}: </b>{{ coursework_project.name }}</div>{% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {%- endif -%}
+            {%- capture period %}{{ entry.time }} · {{ entry.location }}{% endcapture -%}
+            {% include project_card.html entry=entry title=entry.name period=period meta=entry.institution %}
         {%- endfor -%}
     </div>
-</div>
+
+    <h3 class="cv-sub-title">{% t sub.coursework %}</h3>
+    {%- for entry in site.data.cv.education -%}
+        {%- if entry.coursework_projects -%}
+        <div id="{{ entry.id }}-coursework-projects" class="cv-coursework">
+            <h4 class="cv-entry-title">{{ entry.institution }} <span class="cv-meta">· {{ entry.coursework_projects.size }}</span></h4>
+            <ul class="cv-compact-list" data-collapsible data-limit="6" data-label-more="{% t ui.show_all %}" data-label-less="{% t ui.show_less %}">
+                {%- for cp in entry.coursework_projects -%}<li data-collapsible-item><span class="cv-compact-date">{{ cp.time }}</span><span>{{ cp.name }}</span></li>{%- endfor -%}
+            </ul>
+        </div>
+        {%- endif -%}
+    {%- endfor -%}
+</section>

@@ -1,0 +1,41 @@
+{%- comment -%}
+Project card. Params: entry, title (html), period, meta (subtitle), extra (html line, optional).
+Details titled Summary / Funding / Team become labelled rows; remaining bullets go into a disclosure.
+{%- endcomment -%}
+{%- assign e = include.entry -%}
+{%- assign p_summary = "" -%}{%- assign p_funding = "" -%}{%- assign p_team = "" -%}
+{%- assign rest = "" | split: "" -%}
+{%- for d in e.details -%}
+    {%- case d.title -%}
+        {%- when "Summary" -%}{%- assign p_summary = d.content -%}
+        {%- when "Funding" -%}{%- assign p_funding = d.content -%}
+        {%- when "Team" -%}{%- assign p_team = d.content -%}
+        {%- else -%}{%- assign rest = rest | push: d -%}
+    {%- endcase -%}
+{%- endfor -%}
+{%- if p_summary == "" and e.description -%}{%- assign p_summary = e.description -%}{%- endif -%}
+<article id="{{ e.id }}" class="ui card cv-card" aria-labelledby="{{ e.id }}-title">
+    <div class="content">
+        <h4 id="{{ e.id }}-title" class="cv-entry-title cv-card-title">{{ include.title }}</h4>
+        <div class="cv-meta cv-card-period"><i class="calendar alternate outline icon" aria-hidden="true"></i>{{ include.period }}</div>
+        {%- if include.meta and include.meta != "" -%}<div class="cv-meta cv-card-sub">{{ include.meta }}</div>{%- endif -%}
+        {%- if include.extra -%}<div class="cv-card-extra">{{ include.extra }}</div>{%- endif -%}
+        {%- if p_summary != "" -%}<p class="cv-card-summary">{{ p_summary }}</p>{%- endif -%}
+        {%- if p_funding != "" or p_team != "" -%}
+        <dl class="cv-card-facts">
+            {%- if p_funding != "" -%}<div><dt><i class="money bill alternate outline icon" aria-hidden="true"></i><span class="visually-hidden">{% t ui.funding %}</span></dt><dd>{{ p_funding }}</dd></div>{%- endif -%}
+            {%- if p_team != "" -%}<div><dt><i class="users icon" aria-hidden="true"></i><span class="visually-hidden">{% t ui.team %}</span></dt><dd>{{ p_team }}</dd></div>{%- endif -%}
+        </dl>
+        {%- endif -%}
+        {%- if rest.size > 0 -%}
+        <details class="cv-disclosure">
+            <summary>{% t ui.details %} ({{ rest.size }})</summary>
+            {% include detail_list.html details=rest %}
+        </details>
+        {%- endif -%}
+    </div>
+    {%- assign real_links = e.links | where_exp: "l", "l.link != '#'" -%}
+    {%- if real_links.size > 0 -%}
+    <div class="extra content cv-card-links">{% include link_buttons.html links=real_links %}</div>
+    {%- endif -%}
+</article>
