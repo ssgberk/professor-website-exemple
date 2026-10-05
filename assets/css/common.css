@@ -803,6 +803,46 @@ a.ui.label.cv-badge:hover {
     font-variant-numeric: tabular-nums;
 }
 
+/* ---- 12. Generic entries (awards, patents) ----------------------------- */
+.cv-entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: var(--cv-space-3) var(--cv-space-4);
+}
+.cv-entry .cv-meta {
+    margin-top: 0.15rem;
+}
+.cv-entry .cv-badge {
+    margin-left: 0.25em;
+}
+
+.cv-languages h3 .flag {
+    margin-right: 0.45em;
+}
+.cv-skill-group .cv-group-title .cv-meta {
+    font-weight: normal;
+}
+
+/* ---- 13. Show all (collapsible lists) ---------------------------------- */
+@media screen {
+    .is-collapsed,
+    .is-filtered-out {
+        display: none !important;
+    }
+}
+.ui.mini.basic.button.cv-toggle {
+    margin: var(--cv-space-2) 0 0;
+}
+.cv-terms + .cv-toggle {
+    margin-top: var(--cv-space-2);
+}
+.cv-card-extra .icon {
+    margin-right: 0.25em;
+}
+
 /* ---- 14. Focus and motion ---------------------------------------------- */
 .cv-main a:focus-visible,
 .cv-profile a:focus-visible,
@@ -820,6 +860,53 @@ summary:focus-visible {
     .cv-disclosure > summary::before,
     .ui.cards.cv-cards > .card.cv-card {
         transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+}
+
+/* ---- 15. Responsive ----------------------------------------------------- */
+@media only screen and (max-width: 991px) {
+    .cv-course {
+        grid-template-columns: 3.9rem minmax(0, 1fr);
+    }
+    .cv-course-badges {
+        grid-column: 2;
+        margin-top: 0.35rem;
+        white-space: normal;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .cv-profile {
+        padding-top: 0.5em;
+    }
+    .cv-avatar {
+        width: 120px;
+        height: 120px;
+    }
+    .cv-main .cv-highlights {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .cv-year-group,
+    .cv-term {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ui.cv-section .cv-term-title {
+        padding-top: 0.5rem;
+    }
+    .cv-filter-label {
+        width: 100%;
+    }
+    .cv-filter-count {
+        margin-left: 0;
+    }
+    .ui.cv-section .cv-year-title {
+        margin-bottom: var(--cv-space-2);
+        font-size: 1.15rem;
+    }
+    .ui.cv-section.segment {
+        padding-top: 2.75rem;
+    }
+    .ui.dividing.header.cv-section-title {
+        font-size: 1.5rem;
     }
 }
 

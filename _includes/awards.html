@@ -1,14 +1,12 @@
-<div id="awards" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="trophy icon"></i>Awards</h1>
-    <div class="ui relaxed items">
+<section id="awards" class="ui cv-section basic vertical segment" aria-labelledby="awards-title">
+    <h2 id="awards-title" class="ui dividing header cv-section-title"><i class="trophy icon" aria-hidden="true"></i><span class="content">{% t sections.awards %}</span></h2>
+    <ul class="cv-entries" data-collapsible data-limit="6" data-label-more="{% t ui.show_all %}" data-label-less="{% t ui.show_less %}">
         {%- for entry in site.data.cv.awards -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.name }}{% if entry.prize %} &middot; <span class="ui orange text text-normal">{{ entry.prize }}</span>{% endif %}</div>
-                    <div class="meta">{{ entry.issuer }} &middot; <span class="ui teal text">{{ entry.rank }}</span></div>
-                    <div class="extra">{{ entry.time }}</div>
-                </div>
-            </div>
+            <li id="{{ entry.id }}" class="cv-entry" data-collapsible-item>
+                <h3 class="cv-entry-title">{{ entry.name }}{% if entry.prize %} <span class="ui mini basic label cv-badge cv-badge-prize">{{ entry.prize }}</span>{% endif %}</h3>
+                <div class="cv-entry-sub">{{ entry.issuer }}{% if entry.rank %}<span class="cv-meta-sep" aria-hidden="true"> · </span><span class="cv-accent">{{ entry.rank }}</span>{% endif %}</div>
+                <div class="cv-meta">{{ entry.time }}</div>
+            </li>
         {%- endfor -%}
-    </div>
-</div>
+    </ul>
+</section>

@@ -1,9 +1,11 @@
-<div id="skills" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="code icon"></i>Skills</h1>
+<section id="skills" class="ui cv-section basic vertical segment" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="ui dividing header cv-section-title"><i class="code icon" aria-hidden="true"></i><span class="content">{% t sections.skills %}</span></h2>
     {%- for category in site.data.cv.skills -%}
-        <h3 class="ui header">{{ category.name }}</h3>
-        <div class="ui labels">
-            {% for item in category.items %}<div class="ui {% if item.color %}{{ item.color }} {% endif %}label">{% if item.icon %}<i class="{{ item.icon }} icon"></i>{% endif %}{{ item.name }}</div>{% endfor %}
+        <div class="cv-skill-group">
+            <h3 class="cv-group-title">{{ category.name }} <span class="cv-meta">· {{ category.items.size }}</span></h3>
+            <div class="ui labels cv-labels" data-collapsible data-limit="8" data-label-more="{% t ui.show_all %}" data-label-less="{% t ui.show_less %}">
+                {% for item in category.items %}<span class="ui {% if item.color %}{{ item.color }} {% endif %}label" data-collapsible-item>{% if item.icon %}<i class="{{ item.icon }} icon" aria-hidden="true"></i>{% endif %}{{ item.name }}</span>{% endfor %}
+            </div>
         </div>
     {%- endfor -%}
-</div>
+</section>

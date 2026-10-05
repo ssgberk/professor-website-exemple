@@ -81,6 +81,35 @@ $('.toc.item').on('keydown', function (e) {
         btn.addEventListener('click', function () { window.print(); });
     });
 
+    // "Show all (k)" for long lists
+    document.querySelectorAll('[data-collapsible]').forEach(function (box, i) {
+        var items = Array.prototype.filter.call(box.children, function (el) {
+            return el.hasAttribute('data-collapsible-item');
+        });
+        var limit = parseInt(box.getAttribute('data-limit'), 10) || 6;
+        if (items.length <= limit) return;
+        if (!box.id) box.id = 'cv-collapsible-' + i;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ui mini basic button cv-toggle';
+        btn.setAttribute('aria-controls', box.id);
+        function render(expanded) {
+            items.forEach(function (el, idx) {
+                el.classList.toggle('is-collapsed', !expanded && idx >= limit);
+            });
+            btn.setAttribute('aria-expanded', String(expanded));
+            btn.innerHTML = '<i class="angle ' + (expanded ? 'up' : 'down') + ' icon" aria-hidden="true"></i>' +
+                (expanded ? box.getAttribute('data-label-less')
+                          : box.getAttribute('data-label-more') + ' (' + items.length + ')');
+        }
+        btn.addEventListener('click', function () {
+            render(btn.getAttribute('aria-expanded') !== 'true');
+            refreshLayout();
+        });
+        box.insertAdjacentElement('afterend', btn);
+        render(false);
+    });
+
     // publication filter chips (type x year)
     document.querySelectorAll('[data-filters]').forEach(function (bar) {
         var list = document.getElementById(bar.getAttribute('data-filters'));

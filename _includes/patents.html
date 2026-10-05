@@ -1,14 +1,13 @@
-<div id="patents" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="balance scale icon"></i>Patents</h1>
-    <div class="ui relaxed items">
+{%- assign owner = site.data.cv.status.first_name | append: " " | append: site.data.cv.status.family_name -%}
+<section id="patents" class="ui cv-section basic vertical segment" aria-labelledby="patents-title">
+    <h2 id="patents-title" class="ui dividing header cv-section-title"><i class="balance scale icon" aria-hidden="true"></i><span class="content">{% t sections.patents %}</span></h2>
+    <ul class="cv-entries" data-collapsible data-limit="6" data-label-more="{% t ui.show_all %}" data-label-less="{% t ui.show_less %}">
         {%- for entry in site.data.cv.patents -%}
-            <div id="{{ entry.id }}" class="item">
-                <div class="content">
-                    <div class="header">{{ entry.name }}</div>
-                    <div class="meta">Invented by: {% for author in entry.inventors %}{% unless forloop.first %} &middot; {% endunless %}{{ author }}{% endfor %}</div>
-                    <div class="extra">{{ entry.number }} &middot; Filed on {{ entry.time }}</div>
-                </div>
-            </div>
+            <li id="{{ entry.id }}" class="cv-entry" data-collapsible-item>
+                <h3 class="cv-entry-title">{{ entry.name }}</h3>
+                <div class="cv-entry-sub"><span class="visually-hidden">{% t ui.inventors %}: </span>{% for author in entry.inventors %}{% unless forloop.first %}, {% endunless %}{% if author == owner %}<strong>{{ author }}</strong>{% else %}{{ author }}{% endif %}{% endfor %}</div>
+                <div class="cv-meta">{{ entry.number }}<span class="cv-meta-sep" aria-hidden="true"> · </span>{% t ui.filed_on %} {{ entry.time }}</div>
+            </li>
         {%- endfor -%}
-    </div>
-</div>
+    </ul>
+</section>

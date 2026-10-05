@@ -1,18 +1,18 @@
-<div id="additional-info" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="infinity icon"></i>Additional Info</h1>
-    <h3 class="ui header">Hobbies</h3>
-    <div class="ui labels">
+<section id="additional-info" class="ui cv-section basic vertical segment" aria-labelledby="additional-info-title">
+    <h2 id="additional-info-title" class="ui dividing header cv-section-title"><i class="infinity icon" aria-hidden="true"></i><span class="content">{% t sections.additional_info %}</span></h2>
+    <h3 class="cv-group-title">{% t sub.hobbies %}</h3>
+    <div class="ui labels cv-labels">
         {%- for hobby in site.data.cv.additional_info.hobbies -%}
             {%- if hobby.link -%}
-                <a class="ui grey label" href="{{ hobby.link }}" target="_blank"{% if hobby.tooltip %} data-tooltip="{{ hobby.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}>{% if hobby.icon %}<i class="{{ hobby.icon }} icon"></i>{% endif %}{{ hobby.name }}</a>
+                <a class="ui grey label" href="{{ hobby.link }}" target="_blank" rel="noopener"{% if hobby.tooltip %} data-tooltip="{{ hobby.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}>{% if hobby.icon %}<i class="{{ hobby.icon }} icon" aria-hidden="true"></i>{% endif %}{{ hobby.name }}</a>
             {%- else -%}
-                <div class="ui label"{% if hobby.tooltip %} data-tooltip="{{ hobby.tooltip }}" data-variation="mini basic" data-position="top center" data-inverted=""{% endif %}>{% if hobby.icon %}<i class="{{ hobby.icon }} icon"></i>{% endif %}{{ hobby.name }}</div>
+                <span class="ui label">{% if hobby.icon %}<i class="{{ hobby.icon }} icon" aria-hidden="true"></i>{% endif %}{{ hobby.name }}</span>
             {%- endif -%}
         {%- endfor -%}
     </div>
-    <h3 class="ui header">Advice for Contacting {{ site.data.cv.status.first_name }}</h3>
-    <div>Please contact {{ site.data.cv.status.first_name }} for:</div>
-    <div class="ui bulleted list">
-        {% for entry in site.data.cv.additional_info.contact_advice %}<div class="item">{{ entry }}</div>{% endfor %}
-    </div>
-</div>
+    <h3 class="cv-group-title">{% t sub.contact_advice %} {{ site.data.cv.status.first_name }}</h3>
+    <p class="cv-prose">{% t sub.contact_for %}</p>
+    <ul class="cv-details">
+        {% for entry in site.data.cv.additional_info.contact_advice %}<li>{{ entry }}</li>{% endfor %}
+    </ul>
+</section>

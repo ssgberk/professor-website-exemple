@@ -1,21 +1,17 @@
-<div id="languages" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="translate icon"></i>Languages</h1>
-    <div class="ui equal width stackable grid">
+<section id="languages" class="ui cv-section basic vertical segment" aria-labelledby="languages-title">
+    <h2 id="languages-title" class="ui dividing header cv-section-title"><i class="translate icon" aria-hidden="true"></i><span class="content">{% t sections.languages %}</span></h2>
+    <div class="ui equal width stackable grid cv-languages">
         {%- for entry in site.data.cv.languages -%}
             <div class="column">
-                <h3 class="ui header">
-                    <div class="content">
-                        <i class="{{ entry.flag }} flag"></i>{{ entry.name }}
-                        <div class="sub header">{{ entry.level }}</div>
-                    </div>
-                </h3>
+                <h3 class="cv-entry-title"><i class="{{ entry.flag }} flag" aria-hidden="true"></i>{{ entry.name }}</h3>
+                <div class="cv-meta">{{ entry.level }}</div>
                 {%- if entry.certificates -%}
-                    <div class="ui labels">
-                        {% for certificate in entry.certificates %}<div class="ui label"><i class="certificate icon"></i>{{ certificate }}</div>{% endfor %}
+                    <div class="ui labels cv-labels">
+                        {% for certificate in entry.certificates %}<span class="ui mini basic label cv-badge cv-badge-role"><i class="certificate icon" aria-hidden="true"></i>{{ certificate }}</span>{% endfor %}
                     </div>
                 {%- endif -%}
-                {% if entry.remark %}<div>{{ entry.remark }}</div>{% endif %}
+                {% if entry.remark %}<div class="cv-entry-sub">{{ entry.remark }}</div>{% endif %}
             </div>
         {%- endfor -%}
     </div>
-</div>
+</section>
