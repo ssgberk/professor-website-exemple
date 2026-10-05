@@ -62,20 +62,48 @@ education:
   - name: Studied the error rate of a sample transmission system
     time: 11/2008
   courses:
-  - name: Advanced Algorithms · Fall 2025 · Graduate · Instructor — Design and analysis of algorithms, with fictional case studies.
-    code: EX501
-  - name: Machine Learning · Spring 2025 · Graduate · Instructor — Supervised and unsupervised learning on synthetic datasets.
-    code: EX502
-  - name: Statistical Methods · Fall 2024 · Graduate · Co-instructor — Sampling, estimation and hypothesis testing with example data.
-    code: EX503
-  - name: Computational Intelligence · Spring 2024 · Graduate · Instructor — Neural networks and evolutionary methods, illustrated with toy problems.
-    code: EX504
-  - name: Information Retrieval · Fall 2023 · Graduate · Co-instructor — Indexing, ranking and evaluation of sample search systems.
-    code: EX505
-  - name: Distributed Systems · Spring 2023 · Graduate · Instructor — Consensus, replication and fault tolerance in simulated clusters.
-    code: EX506
-  - name: Research Methods · Fall 2022 · Graduate · Instructor — Study design, reproducibility and academic writing.
-    code: EX507
+  - code: EX501
+    name: Advanced Algorithms
+    term: Fall 2025
+    level: Graduate
+    role: Instructor
+    description: Design and analysis of algorithms, with fictional case studies.
+  - code: EX502
+    name: Machine Learning
+    term: Spring 2025
+    level: Graduate
+    role: Instructor
+    description: Supervised and unsupervised learning on synthetic datasets.
+  - code: EX503
+    name: Statistical Methods
+    term: Fall 2024
+    level: Graduate
+    role: Co-instructor
+    description: Sampling, estimation and hypothesis testing with example data.
+  - code: EX504
+    name: Computational Intelligence
+    term: Spring 2024
+    level: Graduate
+    role: Instructor
+    description: Neural networks and evolutionary methods, illustrated with toy problems.
+  - code: EX505
+    name: Information Retrieval
+    term: Fall 2023
+    level: Graduate
+    role: Co-instructor
+    description: Indexing, ranking and evaluation of sample search systems.
+  - code: EX506
+    name: Distributed Systems
+    term: Spring 2023
+    level: Graduate
+    role: Instructor
+    description: Consensus, replication and fault tolerance in simulated clusters.
+  - code: EX507
+    name: Research Methods
+    term: Fall 2022
+    level: Graduate
+    role: Instructor
+    description: Study design, reproducibility and academic writing.
   activities_and_societies:
   - Example Rowing Club
 
@@ -134,22 +162,54 @@ education:
   - name: Designed and implemented a Mine Sweeper clone in C++
     time: 08/2004
   courses:
-  - name: Introduction to Programming · Fall 2025 · Undergraduate · Instructor — First steps in Python with example exercises.
-    code: EX101
-  - name: Data Structures · Spring 2025 · Undergraduate · Instructor — Lists, trees and graphs implemented from scratch.
-    code: EX201
-  - name: Discrete Mathematics · Fall 2024 · Undergraduate · Co-instructor — Logic, sets and combinatorics for computing students.
-    code: EX202
-  - name: Computer Networks · Spring 2024 · Undergraduate · Instructor — Layered protocols explored with a simulated campus network.
-    code: EX301
-  - name: Databases · Fall 2023 · Undergraduate · Instructor — Relational modelling and SQL on a sample library database.
-    code: EX302
-  - name: Operating Systems · Spring 2023 · Undergraduate · Co-instructor — Processes, memory and scheduling with toy kernels.
-    code: EX303
-  - name: Software Engineering · Fall 2022 · Undergraduate · Instructor — Team projects, testing and code review in a fictional studio.
-    code: EX401
-  - name: Pattern Recognition · Spring 2022 · Undergraduate · Instructor — Classic classifiers with small synthetic examples.
-    code: EX402
+  - code: EX101
+    name: Introduction to Programming
+    term: Fall 2025
+    level: Undergraduate
+    role: Instructor
+    description: First steps in Python with example exercises.
+  - code: EX201
+    name: Data Structures
+    term: Spring 2025
+    level: Undergraduate
+    role: Instructor
+    description: Lists, trees and graphs implemented from scratch.
+  - code: EX202
+    name: Discrete Mathematics
+    term: Fall 2024
+    level: Undergraduate
+    role: Co-instructor
+    description: Logic, sets and combinatorics for computing students.
+  - code: EX301
+    name: Computer Networks
+    term: Spring 2024
+    level: Undergraduate
+    role: Instructor
+    description: Layered protocols explored with a simulated campus network.
+  - code: EX302
+    name: Databases
+    term: Fall 2023
+    level: Undergraduate
+    role: Instructor
+    description: Relational modelling and SQL on a sample library database.
+  - code: EX303
+    name: Operating Systems
+    term: Spring 2023
+    level: Undergraduate
+    role: Co-instructor
+    description: Processes, memory and scheduling with toy kernels.
+  - code: EX401
+    name: Software Engineering
+    term: Fall 2022
+    level: Undergraduate
+    role: Instructor
+    description: Team projects, testing and code review in a fictional studio.
+  - code: EX402
+    name: Pattern Recognition
+    term: Spring 2022
+    level: Undergraduate
+    role: Instructor
+    description: Classic classifiers with small synthetic examples.
   activities_and_societies:
   - Example Robotics Team
   - Athletics Team

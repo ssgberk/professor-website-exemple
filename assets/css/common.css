@@ -639,6 +639,65 @@ a.ui.label.cv-badge:hover {
     margin: 0.25rem 0.35rem 0 0;
 }
 
+/* ---- 9. Teaching -------------------------------------------------------- */
+.cv-term {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 0 var(--cv-space-3);
+    padding: var(--cv-space-2) 0;
+    border-top: 1px solid var(--cv-rule-soft);
+}
+.cv-term:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+.ui.cv-section .cv-term-title {
+    margin: 0;
+    padding-top: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cv-muted);
+}
+.cv-course-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.cv-course-list {
+    max-width: calc(var(--cv-measure) + 4rem);
+}
+.cv-course {
+    display: grid;
+    grid-template-columns: 3.9rem minmax(0, 1fr) auto;
+    gap: 0 0.75rem;
+    align-items: baseline;
+    padding: 0.6rem 0;
+}
+.cv-course + .cv-course {
+    border-top: 1px dashed var(--cv-rule-soft);
+}
+.cv-course-code {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--cv-muted);
+    padding-top: 0.15rem;
+    font-variant-numeric: tabular-nums;
+}
+.cv-course-desc {
+    margin: 0.15rem 0 0;
+    color: var(--cv-text-soft);
+    line-height: 1.45;
+}
+.cv-course-badges {
+    white-space: nowrap;
+}
+.cv-course-badges .ui.label.cv-badge:last-child {
+    margin-right: 0;
+}
+
 /* ---- 14. Focus and motion ---------------------------------------------- */
 .cv-main a:focus-visible,
 .cv-profile a:focus-visible,

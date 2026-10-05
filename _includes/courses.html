@@ -1,20 +1,43 @@
-<div id="courses" class="ui cv-section basic vertical segment">
-    <h1 class="ui dividing header"><i class="book icon"></i>Courses</h1>
-    <div class="ui relaxed items">
-        {%- for entry in site.data.cv.education -%}
-            {%- if entry.courses -%}
-                <div id="{{ entry.id }}-courses" class="item">
-                    <div class="content">
-                        <div class="header">{{ entry.institution }}</div>
-                        <div class="meta">{{ entry.courses.size }} major courses</div>
-                        <div class="description">
-                            <div class="ui bulleted list">
-                                {% for course in entry.courses %}<div class="item">{{ course.name }}{% if course.code %} <span class="ui grey text">({{ course.code }})</span>{% endif %}</div>{% endfor %}
-                            </div>
+{%- assign all_courses = "" | split: "" -%}
+{%- for entry in site.data.cv.education -%}
+    {%- if entry.courses -%}{%- assign all_courses = all_courses | concat: entry.courses -%}{%- endif -%}
+{%- endfor -%}
+{%- assign term_keys = "" | split: "" -%}
+{%- for course in all_courses -%}
+    {%- assign parts = course.term | split: " " -%}
+    {%- assign season = parts | first | downcase -%}
+    {%- case season -%}{%- when "spring" -%}{%- assign s_idx = 1 -%}{%- when "summer" -%}{%- assign s_idx = 2 -%}{%- when "fall" or "autumn" -%}{%- assign s_idx = 3 -%}{%- else -%}{%- assign s_idx = 0 -%}{%- endcase -%}
+    {%- capture key %}{{ parts | last }}-{{ s_idx }}|{{ course.term }}{% endcapture -%}
+    {%- assign term_keys = term_keys | push: key -%}
+{%- endfor -%}
+{%- assign term_keys = term_keys | uniq | sort | reverse -%}
+<section id="courses" class="ui cv-section basic vertical segment" aria-labelledby="courses-title">
+    <h2 id="courses-title" class="ui dividing header cv-section-title"><i class="book icon" aria-hidden="true"></i><span class="content">{% t sections.teaching %}</span></h2>
+    <p class="cv-section-lead cv-meta">{{ all_courses.size }} {% t ui.courses %} · {{ term_keys.size }} {% t ui.terms %}</p>
+    <div class="cv-terms" data-collapsible data-limit="3" data-label-more="{% t ui.show_all %}" data-label-less="{% t ui.show_less %}">
+        {%- for key in term_keys -%}
+            {%- assign term = key | split: "|" | last -%}
+            {%- assign term_courses = all_courses | where: "term", term -%}
+            <div class="cv-term" data-collapsible-item>
+                <h3 class="cv-term-title">{{ term }}</h3>
+                <ul class="cv-course-list">
+                    {%- for course in term_courses -%}
+                    {%- assign level = course.level | downcase -%}
+                    {%- assign role = course.role | downcase | replace: "-", "_" -%}
+                    <li class="cv-course">
+                        <span class="cv-course-code">{{ course.code }}</span>
+                        <div class="cv-course-body">
+                            <h4 class="cv-entry-title cv-course-name">{{ course.name }}</h4>
+                            {%- if course.description -%}<p class="cv-course-desc">{{ course.description }}</p>{%- endif -%}
                         </div>
-                    </div>
-                </div>
-            {%- endif -%}
+                        <div class="cv-course-badges">
+                            {%- if course.level -%}<span class="ui mini basic label cv-badge cv-badge-{{ level }}">{% t badge.{{ level }} %}</span>{%- endif -%}
+                            {%- if course.role -%}<span class="ui mini basic label cv-badge cv-badge-role">{% t badge.{{ role }} %}</span>{%- endif -%}
+                        </div>
+                    </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
         {%- endfor -%}
     </div>
-</div>
+</section>
